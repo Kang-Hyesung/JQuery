@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JQTest10.html</title>
+<title>JQTest11.html</title>
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <style type="text/css">
 	body, div, span, table, th, td
@@ -40,12 +40,24 @@
 				var name = $('#item').val();				// 이름
 				var day = Number($('#week').val()) - 1;		// 요일
 				var start = Number($('#start').val());		// 시작시간
-				var end = Number($('#end').val());			// 시작시간
+				var end = Number($('#end').val());			// 종료시간
 				var color = $('#color').val(); 	 			// 색상
+				
+				// javascript 로 처리했던 기능을 jQuery 로 구성하면 더 간단하다.
+				// 1. 모든 tr들 중 원하는 행을 찾고 (-> eq())
+				// 2. 그렇게 찾은 tr의 자식 td들 중 (-> children())
+				//    원하는 td 를 찾아서(-> eq()) 텍스트를 삽입(-> text())하고 색을 바꾼다(-> css()).
 				
 				for(var i = start; i <= end; i++)
 				{
-					$("tr:eq(" + i + ") td:eq(" + day + ")").html(name).css("background-color", color);
+					//$("tr:eq(" + i + ") td:eq(" + day + ")").html(name).css("background-color", color);
+					
+					// 수업
+					//$("#list tr").eq(i).text("선택");
+					//$("#list tr").eq(i).text(name);
+					//$("#list tr").eq(i).children().text(name);
+					//$("#list tr").eq(i).children().eq(1).text(name);
+					$("#list tr").eq(i).children().eq(day+1).text(name).css("background-color", color);
 				}
 				
 			});
